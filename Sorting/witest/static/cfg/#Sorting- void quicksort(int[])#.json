@@ -1,0 +1,30 @@
+{"0": {
+  "instructions": [
+    {"temp$0 = lengthof a": {
+      "eline": 32,
+      "epos": 40,
+      "spos": 9,
+      "sline": 32
+    }},
+    {"temp$1 = temp$0 - 1": {
+      "eline": 32,
+      "epos": 40,
+      "spos": 9,
+      "sline": 32
+    }},
+    {"staticinvoke <Sorting: void quicksort(int[],int,int)>(a, 0, temp$1)": {
+      "eline": 32,
+      "epos": 40,
+      "spos": 9,
+      "sline": 32
+    }},
+    {"return": {
+      "eline": 32,
+      "epos": 40,
+      "spos": 9,
+      "sline": 32
+    }}
+  ],
+  "preds": [],
+  "succs": []
+}}
