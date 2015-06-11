@@ -67,13 +67,51 @@ public class Problem {
         return result;
     }
     
-    
+//=============================================================================    
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
      //Median of Two Sorted Arrays
+    	int total = nums1.length+nums2.length;
+    	if(total%2 ==0){
+    		return (findKthNum(total/2+1,nums1,nums2)+findKthNum(total/2,nums1,nums2))/2;
+
+    	}else{
+    		return findKthNum(total/2+1,nums1,nums2);
+    	}
     	
-    	return 0.0f;
     }
-	 
+	
+    public double findKthNum(int k,int[] nums1, int[] nums2){
+    	if(nums1.length>nums2.length) return findKthNum(k,nums2,nums1);
+    	if(nums1.length==0) return nums2[k-1];
+    	if(k==1) return nums1[0]<nums2[0] ? nums1[0] : nums2[0];
+    	
+    	int pivot = Math.min(k/2, nums1.length);
+    	
+    	
+    	if(nums1[pivot-1]>nums2[k-pivot-1]){
+    		int[] newArray = new int[nums2.length-k+pivot];
+    		for(int i=0;i<newArray.length;i++){
+    			newArray[i] = nums2[i+k-pivot];
+    		}
+    		return findKthNum(pivot,nums1,newArray);
+    	}else if(nums1[pivot-1]<nums2[k-pivot-1]){
+    		int[] newArray = new int[nums1.length-pivot];
+    		for(int i=0;i<newArray.length;i++){
+    			newArray[i] = nums1[i+pivot];
+    		}
+    		return findKthNum(k-pivot,newArray,nums2);
+    	}else{
+    		return nums1[pivot-1];
+    	}
+    
+    }
+    
+    //=====================================================================================
+    public String longestPalindrome(String s) {
+	// longest palindromic substring
+	
+     return null;   
+    }
 
 	 
 	
