@@ -1,12 +1,13 @@
 package LeetCode;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Problem {
 	public static void main(String[] args) {
-		new Problem().longestPalindrome("a");
+		System.out.println(new Problem().myAtoi("-+1"));
 	}
 
 	public int[] twoSum(int[] nums, int target) {
@@ -162,7 +163,81 @@ public class Problem {
 	}
 	
 	public String zigzag(String s,int numRows){
-	return null;
+		StringBuilder sb = new StringBuilder("");
+		int step=0;
+		if(numRows==1) return s;
+		int part = 2*numRows-2;
+		for(int i=0;i<numRows;i++){
+			step=0+i;
+			while(step<s.length()){
+			   sb.append(s.charAt(step));
+			   //计算跳步
+			   if(i==0 || i==numRows){step+=part;}
+			   else if((step+2*i)%part==i){
+				  step=step+2*i;
+			   }else{
+				   step += (part-2*i);
+			   }
+			   
+			}
+		}
+		return sb.toString();
 	}
+	
+	 public int myAtoi(String str) {
+		 if (str == null || str.length() < 1)
+				return 0;
+		 
+			// trim white spaces
+			str = str.trim();
+		 
+			char flag = '+';
+		 
+			// check negative or positive
+			int i = 0;
+			if (str.charAt(0) == '-') {
+				flag = '-';
+				i++;
+			} else if (str.charAt(0) == '+') {
+				i++;
+			}
+			// use double to store result
+			double result = 0;
+		 
+			// calculate value
+			while (str.length() > i && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+				result = result * 10 + (str.charAt(i) - '0');
+				i++;
+			}
+		 
+			if (flag == '-')
+				result = -result;
+		 
+			// handle max and min
+			if (result > Integer.MAX_VALUE)
+				return Integer.MAX_VALUE;
+		 
+			if (result < Integer.MIN_VALUE)
+				return Integer.MIN_VALUE;
+		 
+			return (int) result;
+	    }
+	 
+	    public boolean isMatch(String s, String p) {
+	    	if(s==""){
+	    		if(p.length()==2 && p.charAt(1)=='*') return true;
+	    		else return false;
+	    	}
+	    	if(p.charAt(0)=='.'){
+	    		if(p.charAt(1)=='*') return isMatch(s.substring(1),p);
+	    		else return isMatch(s.substring(1),p.substring(1));
+	    	}else{
+	    		if(p.charAt(0)==s.charAt(0) && p.charAt(1)!='*') return isMatch(s.substring(1),p.substring(1));
+	    		else if(p.charAt(0)==s.charAt(0) && p.charAt(1)=='*') return isMatch(s.substring(1),p);
+	    	}
+	    	
+	    	
+	        return false;
+	    }
 
 }
