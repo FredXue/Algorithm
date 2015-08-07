@@ -228,7 +228,7 @@ public class Problem {
 	    		if(p.length()==2 && p.charAt(1)=='*') return true;
 	    		else return false;
 	    	}
-	    	if(p.charAt(0)=='.'){
+	    	if(p.charAt(0)=='.'){  
 	    		if(p.charAt(1)=='*') return isMatch(s.substring(1),p);
 	    		else return isMatch(s.substring(1),p.substring(1));
 	    	}else{
