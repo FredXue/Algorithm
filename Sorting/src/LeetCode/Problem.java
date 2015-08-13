@@ -223,21 +223,52 @@ public class Problem {
 			return (int) result;
 	    }
 	 
-	    public boolean isMatch(String s, String p) {
+    public boolean isMatch(String s, String p) {
+
 	    	if(s==""){
 	    		if(p.length()==2 && p.charAt(1)=='*') return true;
 	    		else return false;
 	    	}
 	    	if(p.charAt(0)=='.'){  
 	    		if(p.charAt(1)=='*') return isMatch(s.substring(1),p);
+
 	    		else return isMatch(s.substring(1),p.substring(1));
-	    	}else{
-	    		if(p.charAt(0)==s.charAt(0) && p.charAt(1)!='*') return isMatch(s.substring(1),p.substring(1));
-	    		else if(p.charAt(0)==s.charAt(0) && p.charAt(1)=='*') return isMatch(s.substring(1),p);
+	    	}
+            if(p.charAt(1)=='*'){
+            	//match 0 
+                  if(isMatch(s,p.substring(2)))  return true;
+                // match 1 or more
+                  int i =0;
+                  while(i<s.length() && ( p.charAt(0)=='.' || p.charAt(0)==s.charAt(0)) ){
+                	  if(isMatch(s.substring(i+1),p.substring(2)))
+                		  return true;
+                	  i++;
+                  }
+                  return false;
+            }else{
+            	if(s.length()<1) return false;
+            	if(p.charAt(0)=='.' || s.charAt(0)==p.charAt(0)) 
+            	   return isMatch(s.substring(1),p.substring(1));
+            	else 
+            	   return false;
+            }
+
+	    }
+	    
+	    public int maxArea(int[] height) {
+	    	int max =0;
+	    	int i=0;
+	    	int j=height.length-1;
+	    	while(true){
+	    		if(i==j) break;
+	    		int lower =  Math.min(height[i], height[j]);
+	    		max = lower*(j-i)>max ? lower*(j-i)  : max;
+	    		if(height[i]>height[j])  j--; 
+	    		  else  i++;
+	    		
 	    	}
 	    	
-	    	
-	        return false;
+	        return max;
 	    }
 
 }
