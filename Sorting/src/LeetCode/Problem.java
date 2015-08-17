@@ -270,5 +270,30 @@ public class Problem {
 	    	
 	        return max;
 	    }
+	    
+	    public String longestCommonPrefix(String[] strs) {
+	        if(strs.length<1) return "";
+	        boolean flag = true;
+	        int i=0;
+	        char c;
+	        while(flag){
+
+	            for (int j=0;j<strs.length;j++){
+	                if(strs[j].length()<=i){
+	                     flag = false;
+	                     break;
+	                }
+	                c=strs[0].charAt(i);
+	                if(strs[j].charAt(i)!=c ){
+	                     flag = false;
+	                     break;
+	                }
+	            }
+	            i++;
+	        }
+	        i--;
+	        if(i==0) return "";
+	        return strs[0].substring(0,i);
+	    }
 
 }
