@@ -1,13 +1,15 @@
 package LeetCode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 
 public class Problem {
 	public static void main(String[] args) {
-		System.out.println(new Problem().myAtoi("-+1"));
+
 	}
 
 	public int[] twoSum(int[] nums, int target) {
@@ -265,10 +267,14 @@ public class Problem {
 	    		max = lower*(j-i)>max ? lower*(j-i)  : max;
 	    		if(height[i]>height[j])  j--; 
 	    		  else  i++;
-	    		
+	    	
 	    	}
 	    	
 	        return max;
 	    }
+	    
+
+	    
+
 
 }
