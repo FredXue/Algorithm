@@ -272,9 +272,99 @@ public class Problem {
 	    	
 	        return max;
 	    }
-	    
 
+	    public String longestCommonPrefix(String[] strs) {
+	        if(strs.length<1) return "";
+	        boolean flag = true;
+	        int i=0;
+	        char c;
+	        while(flag){
+
+	            for (int j=0;j<strs.length;j++){
+	                if(strs[j].length()<=i){
+	                     flag = false;
+	                     break;
+	                }
+	                c=strs[0].charAt(i);
+	                if(strs[j].charAt(i)!=c ){
+	                     flag = false;
+	                     break;
+	                }
+	            }
+	            i++;
+	        }
+	        i--;
+	        if(i==0) return "";
+	        return strs[0].substring(0,i);
+	    }
 	    
+	    public List<List<Integer>>  threesum(int[] num){
+	    	// 3-sum �ܽ� ��˫ָ�뷨
+	    	 List<List<Integer>> result = new ArrayList<List<Integer>>();
+	         if(num.length<3) return result;
+	         Arrays.sort(num);
+
+	         for(int i=0;i<num.length-2;i++){
+	             if(i==0 || num[i]>num[i-1]){
+	                 int left =i+1;
+	                 int right = num.length-1;
+	                 int negate = 0-num[i];
+	                 while(left<right ){
+	                     List<Integer> temp = new ArrayList<Integer>();
+	                     if((num[right]+num[left])==negate){
+	                         temp.add(num[i]);
+	                         temp.add(num[left]);
+	                         temp.add(num[right]);
+	                         result.add(temp);
+	                         
+	                         left++;
+	                         right--;
+	                         
+	                         while( left<right &&  num[left]==num[left-1]) left++;
+	                         while(left<right && num[right]== num[right+1]) right--;
+	                     }else if((num[right]+num[left])>negate){
+	                         right--;
+	                     }else{
+	                        left++;
+	                     }
+	                 }
+	             }
+	         }
+	         return result;
+	    
+	    }
+	    
+	
+	        public int threeSumClosest(int[] nums, int target) {
+	            int min = Integer.MAX_VALUE;
+	            Arrays.sort(nums);
+	         int result = 0;
+	         
+	         for(int i=0;i<nums.length-2;i++){
+	             int j = i+1;
+	             int k= nums.length-1;
+	             while (j < k) {
+	    			int sum = nums[i] + nums[j] + nums[k];
+	    			int diff = Math.abs(sum - target);
+	     
+	    			if(diff == 0) return sum;
+	     
+	    			if (diff < min) {
+	    				min = diff;
+	    				result = sum;
+	    			}
+	    			if (sum <= target) {
+	    				j++;
+	    			} else {
+	    				k--;
+	    			}
+	             }
+	         
+	         }
+	         
+	         return result;
+
+	        }
 
 
 }
