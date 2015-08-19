@@ -2,14 +2,17 @@ package LeetCode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 
 public class Problem {
 	public static void main(String[] args) {
-
+    List<String>  a =   new Problem().letterCombinations("23");
+    for(String s: a){
+    	System.out.println(s);
+    }
 	}
 
 	public int[] twoSum(int[] nums, int target) {
@@ -365,6 +368,53 @@ public class Problem {
 	         return result;
 
 	        }
+	        
+
+	          
+
+     HashMap<Integer,String> map = new HashMap<Integer,String>();
+    public List<String> letterCombinations(String digits) {
+       
+        map.put(2,"abc");
+        map.put(3,"def");
+        map.put(4,"ghi");
+        map.put(5,"jkl");
+        map.put(6,"mno");
+        map.put(7,"pqrs");
+        map.put(8,"tuv");
+        map.put(9,"wxyz");
+        map.put(0,"");
+        List<String> result = new ArrayList<String>();
+        if(digits.length()<1 || digits==null){
+            return result;
+        }
+        ArrayList<Character> temp = new ArrayList<Character>();
+        getString(digits,temp,result);
+        
+        return result;
+        
+    }
+    
+    public void getString(String digits,List<Character> temp, List<String> result){
+        if(digits.length()<1){
+            char[] n = new char[temp.size()];
+            for(int i=0;i<temp.size();i++){
+                n[i] = temp.get(i);
+            }
+            String s = String.valueOf(n);
+            result.add(s);
+            return;
+        }
+        
+        Integer num = Integer.valueOf(digits.substring(0,1));
+        digits = digits.substring(1);
+        for(char c: map.get(num).toCharArray()){
+            temp.add(c);
+            getString(digits,temp,result);
+            temp.remove(temp.size()-1);  // This is important!
+        }
+    
+   }
 
 
 }
