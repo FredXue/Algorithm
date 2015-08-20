@@ -364,6 +364,69 @@ public class Problem {
 	         return result;
 
 	        }
+	        
+	        public List<List<Integer>> fourSum(int[] nums, int target) {
+	            List<List<Integer>> result = new ArrayList<List<Integer>>();
+	            if(nums.length<4) return result;
+	            Arrays.sort(nums);
+            // Use HashSet to avoid duplicate element.
+	            for(int i=0;i<nums.length-3;i++){
+	                if(i>0 && nums[i-1]==nums[i]) continue;
+	                for(int j=i+1;j<nums.length-2;j++){
+	                       if(j>i+1 && nums[j-1]==nums[j]) continue; // avoid duplicate
+	                               int start =j+1;
+	                              int end = nums.length-1;
+	                  while(start<end){
+	                    if((nums[i]+nums[j]+nums[start]+nums[end])==target){
+	                        List<Integer> temp = new ArrayList<Integer>();
+	                        temp.add(nums[i]);
+	                         temp.add(nums[j]);
+	                          temp.add(nums[start]);
+	                           temp.add(nums[end]);
+	                           result.add(temp);
+	                           
+	                           start++;
+	                           end--;
+	                           while(start<end && nums[start]==nums[start-1]) start++;
+	                           
+	                           while(start<end && nums[end]==nums[end+1]) end--;
+	                    }else if ((nums[i]+nums[j]+nums[start]+nums[end])>target){
+	                        end--;
+	                    }else start++;
+	                    
+	                  }
+	                }
+	            }
+	            
+	            return result;
+	        }
+	        
+	        public ListNode removeNthFromEnd(ListNode head, int n) {
+	            if(head==null) return null;
+	            
+	            ListNode front = head;
+	            ListNode back = head;
+	            while(n>0){
+	                front = front.next;
+	                n--;
+	            }
+	            
+	            if(front == null){
+	                 head = head.next;
+	                 return head;
+	            }
+	            
+	            while(front.next!=null){
+	                front = front.next;
+	                back = back.next;
+	            }
+	            ListNode d = back.next;
+	            back.next = back.next.next;
+	            d.next = null;
+	            
+	            
+	            return head;
+	        }
 	    
 
 }
