@@ -415,6 +415,35 @@ public class Problem {
         }
     
    }
+    
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head==null) return null;
+        
+        ListNode front = head;
+        ListNode back = head;
+        while(n>0){
+            front = front.next;
+            n--;
+        }
+        
+        if(front == null){
+             head = head.next;
+             return head;
+        }
+        
+        while(front.next!=null){
+            front = front.next;
+            back = back.next;
+        }
+        ListNode d = back.next;
+        back.next = back.next.next;
+        d.next = null;
+        
+        
+        return head;
+    }
+    
+    
 
 
 }
