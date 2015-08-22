@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Stack;
 
 
 public class Problem {
@@ -406,36 +407,8 @@ public class Problem {
 	            return result;
 	        }
 	        
-	        public ListNode removeNthFromEnd(ListNode head, int n) {
-	            if(head==null) return null;
-	            
-	            ListNode front = head;
-	            ListNode back = head;
-	            while(n>0){
-	                front = front.next;
-	                n--;
-	            }
-	            
-	            if(front == null){
-	                 head = head.next;
-	                 return head;
-	            }
-	            
-	            while(front.next!=null){
-	                front = front.next;
-	                back = back.next;
-	            }
-	            ListNode d = back.next;
-	            back.next = back.next.next;
-	            d.next = null;
-	            
-	            
-	            return head;
-	        }
-	    
 
-
-	          
+	//=======================================================================================          
 
      HashMap<Integer,String> map = new HashMap<Integer,String>();
     public List<String> letterCombinations(String digits) {
@@ -480,7 +453,8 @@ public class Problem {
         }
     
    }
-    
+ 
+    //=======================================================================
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if(head==null) return null;
         
@@ -506,6 +480,74 @@ public class Problem {
         
         
         return head;
+    }
+    
+    
+    public boolean isValid(String s) {
+    	if(s==null || s.length()<1) return false;
+    	
+        Stack<Character> stack = new Stack<Character>();
+      
+    	
+        for(int i=0;i<s.length();i++){
+        	switch(s.charAt(i)){
+        	case '{':{
+        		stack.push('{');
+        		break;
+        	}
+        	case '}':{
+        	    if(stack.isEmpty()) return false;
+        	    Character c = stack.pop();
+        	    if(c == null || !c.equals('{') ) return false;
+        		break;
+        	}
+        	case '[':{
+        		stack.push('[');
+        		break;
+        	}
+        	case ']':{
+        		   if(stack.isEmpty()) return false;
+        		   Character c = stack.pop();
+           	    if(c == null || !c.equals('[') ) return false;
+        		break;
+        	}
+        	case '(':
+        	{
+        		stack.push('(');
+        		break;
+        	}
+        	case ')':{
+        		   if(stack.isEmpty()) return false;
+        		   Character c = stack.pop();
+           	    if(c == null || !c.equals('(') ) return false;
+        		break;
+        	}
+        		
+        	}
+        }
+      
+    	if(!stack.isEmpty()) return false;
+        return true;
+        
+       }
+    
+  //==========================================================
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<String>();
+        dfs(result,"",n,n);
+        return result;
+    }
+    
+    
+    public void dfs(List<String> list,String s, int left, int right){
+        if(left==0 && right==0) {
+            list.add(s);
+            return;
+        }
+        if(left>right) return;
+        
+        if(left>0) dfs(list,s+'(',left-1,right);
+        if(right>0) dfs(list,s+')',left,right-1);
     }
     
     
