@@ -2,9 +2,11 @@ package LeetCode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 
@@ -549,6 +551,91 @@ public class Problem {
         if(left>0) dfs(list,s+'(',left-1,right);
         if(right>0) dfs(list,s+')',left,right-1);
     }
+    
+    
+    //======================================================================
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>();
+        ListNode result;
+        if(lists==null || lists.length<1) return null;
+        
+       
+        return lists[0];
+    }
+    
+    
+    class SizeComparator  implements Comparator<ListNode>{
+    	public int compare(ListNode l1,ListNode l2){
+    		if(l1.val>l2.val) return 1;
+    		else if(l1.val==l2.val) return 0;
+    		else return -1;
+    	}
+    }
+    
+    
+    
+    //===============================================================================
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if(head ==null || head.next==null) return head;
+        if(k<=1) return head;
+        
+        int len = getLength(head);
+        if(len/k==0) return head;
+        ListNode preTail = null;
+        ListNode current = head;
+        ListNode res =null;
+        
+        while(getLength(current)>=k){
+            if(preTail==null) {
+                res =  reverse(current,k);
+            }else{
+                preTail.next = reverse(current,k);
+            }
+          
+            preTail = current;
+            current= current.next;
+            if(current==null) break;
+        }
+        
+        return res;
+        
+    }
+    
+    public ListNode reverse(ListNode head,int k){
+       //reverse a list and return the new head;
+        ListNode pre,cur,nex;
+        pre = head;
+        cur = head.next;
+        if(k==2){
+           pre.next=cur.next;
+           cur.next=pre;
+           return cur;
+        }else{
+            nex=cur.next;
+            while(k>1){
+                k--;
+                cur.next=pre;
+                pre=cur;
+                cur=nex;
+                if(nex!=null) nex=nex.next;
+            }
+            head.next=cur;
+            return pre;
+        }
+
+        
+    }
+    
+    public int getLength(ListNode node){
+        int l=0;
+        if(node==null) return l;
+        while(node!=null){
+            node = node.next;
+            l++;
+        }
+        return l;
+    }
+     
     
     
 

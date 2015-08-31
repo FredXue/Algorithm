@@ -55,6 +55,7 @@ public class Sort {
    public static boolean less(Comparable v, Comparable w){
 	   return v.compareTo(w)<0;
    }
+   
    public static void exch(Comparable[] a, int n,int m){
 	   Comparable swap=a[n];
 	   a[n]=a[m];
@@ -66,7 +67,7 @@ public class Sort {
 	   for(int i =lo;lo<=hi;lo++){
 		   if(less(a[i+1],a[i])) result=false;
 	   }
-	   
+	
 	   return result;
    }
 }
