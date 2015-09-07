@@ -629,6 +629,7 @@ public class Problem {
     public int getLength(ListNode node){
         int l=0;
         if(node==null) return l;
+       
         while(node!=null){
             node = node.next;
             l++;
