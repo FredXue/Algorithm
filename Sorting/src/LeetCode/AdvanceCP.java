@@ -52,6 +52,7 @@ public class AdvanceCP {
 			}
 			index--;
 			System.out.println("Transmitting a new object."+buffer[index]);
+			this.notify();
 			return buffer[index];
 		}
 	}
@@ -65,6 +66,7 @@ public class AdvanceCP {
 		         while(index==buffer.length){
 		        	 //buffer is full
 		        	try {
+		        		this.notify();// This is critical 
 						this.wait();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -88,6 +90,7 @@ public class AdvanceCP {
 			}
 			index--;
 			System.out.println("Consuming a new object."+buffer[index]);
+			this.notify();
 			return buffer[index];
 		}
 	}
@@ -100,12 +103,12 @@ public class AdvanceCP {
 		public void run(){
 			while(true){
 			pb.produce();
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(50);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			}
 		}
 	}
@@ -120,12 +123,12 @@ public class AdvanceCP {
 		public void run(){
 			while(true){
 			cb.push(pb.pop());
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(10);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			}
 		}
 	}
@@ -138,12 +141,12 @@ public class AdvanceCP {
 		public void run(){
 			while(true){
 		    cb.pop();
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(50);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			}
 		}
 		
