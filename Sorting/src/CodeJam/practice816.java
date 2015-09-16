@@ -34,6 +34,7 @@ public class practice816 {
 	}
 	
 	
+
 	public static String getAnswer(BigInteger index){
 		if(index.compareTo(new BigInteger("1"))==0) return "0";
 		if(index.compareTo(new BigInteger("3"))==0) return "1";
@@ -45,9 +46,7 @@ public class practice816 {
 	
 	}
 	
-	
 
-	
 	
 	
 	
