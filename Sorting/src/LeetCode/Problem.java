@@ -10,10 +10,9 @@ import java.util.Stack;
 
 public class Problem {
 	public static void main(String[] args) {
-    List<String>  a =   new Problem().letterCombinations("23");
-    for(String s: a){
-    	System.out.println(s);
-    }
+     int[] num = {88, 459, 5262, 88, -17, 677, 88, 667, -17, 459, 5262};
+		
+		System.out.println(new Problem().triple(num));
 	}
 
 	public int[] twoSum(int[] nums, int target) {
@@ -549,6 +548,19 @@ public class Problem {
         if(left>0) dfs(list,s+'(',left-1,right);
         if(right>0) dfs(list,s+')',left,right-1);
     }
+    
+    public int triple(int[] nums){
+    	if(nums==null || nums.length<1) return Integer.MAX_VALUE;
+    	  Arrays.sort(nums);
+    	  int a =nums[0];
+    	  for(int i =2;i<nums.length;i=i+2){
+    		  if(nums[i]==a) return a;
+    		  a =nums[i];
+    	  }
+    	  
+    	  return Integer.MAX_VALUE;
+    	 
+    	}
     
     
 
