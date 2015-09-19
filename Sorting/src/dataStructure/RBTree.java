@@ -22,9 +22,9 @@ public class RBTree {
 	private static final boolean BLACK = false;
 	
     private class Node{
-    	private int key;
-    	private int val;
-    	private Node left,right;
+    	int key;
+    	int val;
+        Node left,right;
     	boolean color; // color of parent link
     	public Node(int k,int v){
     		key =k;
@@ -38,15 +38,28 @@ public class RBTree {
     }
     
     private Node rightRotation(Node x){
-    	
+    	Node r  = x.right;
+    	x.right = r.left;
+    	r.left = x;
+    	r.color = x.color;
+    	x.color=RED;
+    	return r;
     }
     
-    private Node leftRotation(Node x){
-    	
+    private Node leftRotation(Node h){
+    	Node x = h.right;
+    	h.right = x.left;
+    	x.left = h;
+    	x.color = h.color;
+    	h.color = RED;
+    	return x;
     }
     
     private void flipColor(Node x){
+    	x.color=RED;
+    	x.right.color=BLACK;
+    	x.left.color = BLACK;
     	
     }
-
+    
 }

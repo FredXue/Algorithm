@@ -1,15 +1,14 @@
 package codeJam;
 
-import java.util.Comparator;
-import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 
 
 public class MSPractice {
-    public static void main(String[] args){       
-    	
+    public static void main(String[] args){    
+    	new MSPractice().BrowsingCache();
     }
     
     //========================================================================
@@ -17,38 +16,34 @@ public class MSPractice {
     	Scanner sc = new Scanner(System.in);
     	int hitCount = sc.nextInt();
     	int cacheSize = sc.nextInt();
+    	sc.nextLine();
+    	HashMap<String,Integer> map = new HashMap<String,Integer>();
     	for(int i = 0;i<hitCount;i++){
     		String url = sc.nextLine();
-    		
+    		if(!map.containsKey(url) ){
+    			System.out.println("Internet");
+    			map.put(url, i);
+    			if(map.size()>cacheSize)  delLast(map);
+    			
+    		}else{
+    			System.out.println("Cache");
+    			map.put(url, i);
+    		}
     	}
+    }
+    
+    public void delLast(HashMap<String,Integer> m){
+    	int i = Integer.MAX_VALUE;
+    	String k=null;
+    	for(Entry e: m.entrySet()){
+    		if((Integer)e.getValue()<i){ k =(String) e.getKey();
+    		i=(Integer)e.getValue();
+    		}
+    	}
+    	m.remove(k, i);
     }
 }
 
-class Container{
-	 TreeMap<String,Integer> m = new TreeMap<String,Integer>(new ValueComparator());
-	 int count = 0;
-	 final int MAX_SIZE;
-	 public Container(int size){
-		 MAX_SIZE=size;
-	 }
-	 
-	 public boolean isFull(){
-		 return true;
-	 }
-	 
-	 public String hit(){
-		 return "d";
-	 }
-	 
-	 static class ValueComparator implements Comparator<String>{
-		 Map<String,Integer> basemap;
 
-         @Override
-         public int compare(String a,String b){
-        	 
-        	 return 0;
-         }
-	 }
 	 
 
-}

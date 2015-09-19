@@ -6,6 +6,14 @@ package dataStructure;
  * @author Fred Xue
  * @Date 2015年9月16日
  */
+
+
+/**
+ * 2-3 tree  definition 
+ * allow 1 or 2 keys per node
+ * every path from root to null link has same length
+ * 
+ */
 public class BinarySearchTree {
     private Node root;
     
