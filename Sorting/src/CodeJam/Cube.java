@@ -1,4 +1,4 @@
-package codeJam;
+package CodeJam;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

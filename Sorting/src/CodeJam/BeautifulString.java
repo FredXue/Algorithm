@@ -1,4 +1,4 @@
-package codeJam;
+package CodeJam;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,52 +36,90 @@ public class BeautifulString {
 	 }
 	 
 	 void solve(){
-		int tc = in.nextInt();
-		data[] log = new data[tc];
-		Stack<data> stack = new Stack<data>();
-		List<data> list = new ArrayList<data>();
-		for(int i=0;i<tc;i++){
-			String f = in.next();
-			String time  = in.next();
-			String action = in.next();
-            log[i] = new data(f,time,action);
-		}
-		for(int i=0;i<tc;i++){
-			if(i>0 && log[i].time<log[i-1].time) {System.out.println("Incorrect performance log");
-			  return;
-			}
-			if(log[i].action.equals("START")){ stack.push(log[i]);
-			  list.add(log[i]);
-			}
-			else{
-				if(!stack.peek().func.equals(log[i].func)  || stack.peek().time>log[i].time ){
-				  System.out.println("Incorrect performance log");
-				  return;
-				}else{
-					data d = stack.pop();
-					d.time = log[i].time-d.time;
-				}
-			}
-		}
-		if(!stack.isEmpty()) {System.out.println("Incorrect performance log");
-		return ;
-		}
-		
-		for(data d:list){
-			System.out.println(d.func+" "+intToTime(d.time));
-		}
+		 int tc = in.nextInt();
+		 for(int i=0;i<tc;i++){
+			 int len = in.nextInt();
+			 String s = in.next();
+			 List<data> list = new ArrayList<data>();
+			 for(int j=0;j<len;j++){
+				 int count =1;
+				 if(j+1<len && s.charAt(j)==s.charAt(j+1)) count++;
+				 else{
+				
+					 list.add(new data(s.charAt(j),count));
+				 }
+			 }
+			 boolean flag=true;
+			 if(list.size()<3) {System.out.println("NO"); continue;}
+			 for(int j=0;j<list.size()-2;j++){
+				 if(list.get(j).a==(list.get(j+1).a-1) && list.get(j).a==(list.get(j+2).a-2) &&
+						 list.get(j).len>=list.get(j+1).len && list.get(j+2).len>=list.get(j+1).len)
+				 {
+					 System.out.println("YES"); 
+				 flag=false;
+				 break;}
+			 }
+			if(flag) System.out.println("NO");
+
+		 }
 	 }
 	 
 	 class data{
-		 String func;
-		 int time;
-		 String action;
-		 data(String f, String t,String a){
-			 func =f;
-			 time = timeToint(t);
-			 action = a;
+		 int a;
+		 int len;
+		 data(char ab,int l){
+			 a=(int)ab;
+			 len=l;
 		 }
 	 }
+	 
+//	 void solve(){
+//		int tc = in.nextInt();
+//		data[] log = new data[tc];
+//		Stack<data> stack = new Stack<data>();
+//		List<data> list = new ArrayList<data>();
+//		for(int i=0;i<tc;i++){
+//			String f = in.next();
+//			String time  = in.next();
+//			String action = in.next();
+//            log[i] = new data(f,time,action);
+//		}
+//		for(int i=0;i<tc;i++){
+//			if(i>0 && log[i].time<log[i-1].time) {System.out.println("Incorrect performance log");
+//			  return;
+//			}
+//			if(log[i].action.equals("START")){ stack.push(log[i]);
+//			  list.add(log[i]);
+//			}
+//			else{
+//				if(!stack.peek().func.equals(log[i].func)  || stack.peek().time>log[i].time ){
+//				  System.out.println("Incorrect performance log");
+//				  return;
+//				}else{
+//					data d = stack.pop();
+//					d.time = log[i].time-d.time;
+//				}
+//			}
+//		}
+//		if(!stack.isEmpty()) {System.out.println("Incorrect performance log");
+//		return ;
+//		}
+//		
+//		for(data d:list){
+//			System.out.println(d.func+" "+intToTime(d.time));
+//		}
+//	 }
+//	 
+//	 class data{
+//		 String func;
+//		 int time;
+//		 String action;
+//		 data(String f, String t,String a){
+//			 func =f;
+//			 time = timeToint(t);
+//			 action = a;
+//		 }
+//	 }
 	 
 	 static int timeToint(String time){
 		 String[] str = time.split(":");

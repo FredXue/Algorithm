@@ -1,4 +1,4 @@
-package codeJam;
+package CodeJam;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
