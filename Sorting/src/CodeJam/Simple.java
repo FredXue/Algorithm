@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
+
 
 public class Simple {
      FastScanner in;
@@ -25,28 +28,94 @@ public class Simple {
 	 }
 	 
 	 void solve(){
-	      String s = in.next();
-	      if(isP(s)) {
-	    	  System.out.println("YES");
-	    	  return;
-	      }
-	      for(int i=0;i<s.length();i++){
-	    	  String newString =s.substring(1);
-	    	  if(i>0) newString =  s.substring(0,i)+s.substring(i+1);
-	    	  if(isP(newString))     { System.out.println("YES");
-	    	  return;
-	    	  }
-	      }
-	      System.out.println("NO");
+		   int[] a = {0,0};
+              System.out.println(countCacheMiss(1,a));
 		 }
 		 
-		 boolean isP(String s){
-			 for(int i=0;i<s.length()/2;i++){
-				 if(s.charAt(i)!=s.charAt(s.length()-i-1)) return false;
-			 }
-			 return true;
-		 }
+
+		 
+		 public static int countCacheMiss(int max_cache_size, int[] page_requests)
+		  {
+		    // INSERT YOUR CODE HERE
+		      Cache c = new Cache(max_cache_size);
+		      
+		      int count=0;
+		  
+		      for(int k : page_requests){
+		    	  if(!c.isHit(k)) {
+		    		  count++ ;
+		    		  c.put(k);
+		    	  }
+		      }
+		      
+		      return count;
+		     
+		  }
 	 
+
+		  
+		  
+
+//		 baidu first solution 
+//       int row = in.nextInt();
+//       for(int i=0;i<row;i++){
+//       	int[] array = new int[12];
+//       	String per = in.next();
+//       	int result = 0;
+//       	for(int k =0;k<12;k++){
+//       		int x =0;
+//       		for(int j=0;j<per.charAt(k)-'a';j++){
+//       			if(array[j]==0)  x++;         			
+//       			
+//       		}
+//       		result = result+ x*j(11-k);
+//               array[per.charAt(k)-'a'] = 1;
+//       	}
+//       	result++;
+//       	System.out.println(result);
+//       }  
+		 
+		 
+//		 Solution 2
+//		 String s1 = in.next();
+//		 String s2 = in.next();
+//		 char[] ss1 = s1.toCharArray();
+//		 char[] ss2 = s2.toCharArray();
+//		 int flag =1;
+//		 HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+//		 for(char c :ss1){
+//			 if(map.containsKey(c)){
+//				 map.put(c, map.get(c)+1);
+//			 }else{
+//				 map.put(c,1);
+//			 }
+//		 }
+//		 
+//		 for(char c: ss2){
+//			 if(map.containsKey(c)){
+//				 if(map.get(c)>1)  map.put(c, map.get(c)-1);
+//				 else map.remove(c);
+//			 }else{
+//				 flag =0;
+//				 break;
+//			 }
+//		 }
+//		 
+//		 System.out.println(flag);
+		 
+
+		 
+
+//	 int j(int n){
+//		 int x =1;
+//		 while(n>0){
+//			 x= x*n;	
+//			 n--;
+//		 }
+//		 return x;
+//	 }
+		 
+		 
 	 
 	
 	 class FastScanner{
@@ -110,7 +179,44 @@ public class Simple {
 		}
 	}
 	 
+	 
+	 
 	 public static void main(String[] args) {
 			new Simple().run();
 		}
+}
+
+
+class Cache{
+	
+	 int point;
+	 int currentSize;
+	 int[] cache;
+	 public Cache(int n){
+		 cache = new int[n];
+		 currentSize = 0;
+		 point = 0;
+	 }
+	 
+	 public void put(int n){
+		 if(isFull()){ cache[point]=n;
+		    point= point==cache.length-1 ? 0 : point+1;
+		 }else{
+			 cache[currentSize] = n;
+			 currentSize++;
+		 }
+	 }
+	 public boolean isFull(){
+		 return currentSize==cache.length;
+	 }
+	 
+	 
+	 public boolean isHit(int n){
+		 for(int i=0;i<currentSize;i++){
+			 if(cache[i]==n) return true;
+		 }
+		 return false;
+	 }
+	 
+	
 }
