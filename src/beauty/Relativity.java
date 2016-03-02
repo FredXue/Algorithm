@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Relativity{
+    /**
+     *Calcualte the relativity of two strings. 
+     **/ 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         String s1 = sc.next();
