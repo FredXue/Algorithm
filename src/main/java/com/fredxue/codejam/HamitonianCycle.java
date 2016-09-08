@@ -1,4 +1,4 @@
-package CodeJam;
+package com.fredxue.codejam;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,12 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
-
-public class Simple {
+public class HamitonianCycle {
      FastScanner in;
      PrintWriter out;
 
@@ -26,12 +23,42 @@ public class Simple {
 			 
 			 out.close();		 
 	 }
-	 
+	 int count =0;
+	 int edge[];
+	 int map[];
 	 void solve(){
-
+	         int vertex = in.nextInt();
+	         int m= in.nextInt();
+	         
+	         edge = new int[vertex];
+	         map = new int[1<<vertex];
+	         
+	         for(int i=0;i<vertex;i++){
+	        	 map[1<<i] = i+1; 
+	         }
+	         while(m-->0){
+	        	 int u = in.nextInt();
+	        	 int v = in.nextInt();
+	        	 edge[u-1]  = edge[u-1] | 1<<v; //record edges
+	         }
+	         
+	         dfs(1,1<<vertex-2);
+	         
+	         System.out.println(count);
 		 }
-		   
-
+	 
+	 public void dfs(int v,int unvisited){
+		 if(unvisited==0 && (edge[v] & 1)>0) count++;
+		 int rest = unvisited & edge[v];
+		 while(rest>0){
+			  int tp = rest & (-rest);
+			  dfs(map[tp],unvisited - tp );
+			  rest = rest -tp;
+		 }
+		 return;
+	 }
+		 
+		
 	 class FastScanner{
 		BufferedReader br;
 		StringTokenizer st;
@@ -93,9 +120,7 @@ public class Simple {
 		}
 	}
 	 
-	 
-	 
 	 public static void main(String[] args) {
-			new Simple().run();
+			new HamitonianCycle().run();
 		}
 }

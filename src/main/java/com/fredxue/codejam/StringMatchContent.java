@@ -1,4 +1,4 @@
-package CodeJam;
+package com.fredxue.codejam;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class HamitonianCycle {
+public class StringMatchContent {
      FastScanner in;
      PrintWriter out;
 
@@ -23,42 +23,40 @@ public class HamitonianCycle {
 			 
 			 out.close();		 
 	 }
-	 int count =0;
-	 int edge[];
-	 int map[];
-	 void solve(){
-	         int vertex = in.nextInt();
-	         int m= in.nextInt();
-	         
-	         edge = new int[vertex];
-	         map = new int[1<<vertex];
-	         
-	         for(int i=0;i<vertex;i++){
-	        	 map[1<<i] = i+1; 
-	         }
-	         while(m-->0){
-	        	 int u = in.nextInt();
-	        	 int v = in.nextInt();
-	        	 edge[u-1]  = edge[u-1] | 1<<v; //record edges
-	         }
-	         
-	         dfs(1,1<<vertex-2);
-	         
-	         System.out.println(count);
-		 }
 	 
-	 public void dfs(int v,int unvisited){
-		 if(unvisited==0 && (edge[v] & 1)>0) count++;
-		 int rest = unvisited & edge[v];
-		 while(rest>0){
-			  int tp = rest & (-rest);
-			  dfs(map[tp],unvisited - tp );
-			  rest = rest -tp;
+	 void solve(){
+	      String a  = in.next();
+	      String b = in.next();
+	      int m = a.length();
+	      int n = b.length();
+	      int dp[][] = new int[m+1][n+1];
+	      int f[][] = new int[m+1][n+1];
+	      int dp1[][] = new int[m+1][n+1]; //record the split way
+	      
+	      //preprocess to handle the subsed must longer than 3.
+	      for(int i=1;i<=m;i++){
+	    	  for(int j=1;j<=n;j++){
+	    		  if(a.charAt(i-1)==b.charAt(j-1))  f[i][j] = f[i-1][j-1]+1;
+	    		  else f[i][j] = 0;
+	    	  }
+	      }
+	      //memorize the subproblem.
+	      for(int i=1;i<=m;i++){
+	    	  for(int j=1;j<=n;j++){
+	    		if(f[i][j]>=3) dp1[i][j] = dp[i-3][j-3]+3;  
+	    		
+	    		if(f[i][j]>3)  dp1[i][j] = Math.max(dp1[i][j], dp1[i-1][j-1]+1);
+	    		
+	    		dp[i][j] =  Math.max(dp[i-1][j],dp[i][j-1]);
+	    		dp[i][j] = Math.max(dp1[i][j], dp[i][j]);
+	    	  }
+	      }
+	      
+	      
+	      System.out.println(dp[m][n]);
 		 }
-		 return;
-	 }
-		 
 		
+	
 	 class FastScanner{
 		BufferedReader br;
 		StringTokenizer st;
@@ -121,6 +119,6 @@ public class HamitonianCycle {
 	}
 	 
 	 public static void main(String[] args) {
-			new HamitonianCycle().run();
+			new StringMatchContent().run();
 		}
 }

@@ -1,4 +1,4 @@
-package CodeJam;
+package com.fredxue.codejam;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,34 +8,33 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Template {
      FastScanner in;
      PrintWriter out;
-
-
-
+     
+	 final String file ="E:\\Job\\Google\\9.20\\"+"A.in";
+	 final String outfile ="E:\\Job\\Google\\9.20\\"+"A.out";
+	 
 	 void run(){
-			 in = new FastScanner(System.in);
-			 out = new PrintWriter(System.out);
+		 try{
+			 in = new FastScanner(new File(file));
+			 out = new PrintWriter(new File(outfile));
 			 
 			 solve();
 			 
-			 out.close();		 
+			 out.close();
+		 }catch(FileNotFoundException e){
+			 e.printStackTrace();
+		 }
+		 
 	 }
 	 
 	 void solve(){
-            int flag = 1;
-            flag ^= 1;
-            System.out.println(flag);
-            
+		 
 	 }
 	 
-
-
 	 
 	 
 	
@@ -101,6 +100,6 @@ public class Main {
 	}
 	 
 	 public static void main(String[] args) {
-			new Main().run();
+//			new C().run();
 		}
 }

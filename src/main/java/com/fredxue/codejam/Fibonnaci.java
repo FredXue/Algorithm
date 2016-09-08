@@ -1,10 +1,10 @@
-package CodeJam;
+package com.fredxue.codejam;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import CodeJam.Main.FastScanner;
+import com.fredxue.codejam.Main.FastScanner;
 
 public class Fibonnaci {
     FastScanner in;

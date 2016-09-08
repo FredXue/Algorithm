@@ -1,4 +1,4 @@
-package CodeJam;
+package com.fredxue.codejam;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
