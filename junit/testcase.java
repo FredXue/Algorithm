@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import LeetCode.Problem;
+import com.fredxue.LeetCode.Problem;
 
 
 public class testcase {

@@ -20,11 +20,6 @@ public class NutritionFacts {
 //        //Required parameters
 //        private final int servingSize;
 //        private final int servings;
-       ArrayList<Foo> list = new Gson().fromJson("[{x:1}]", ArrayList<Foo>.class);
     }
 }
 
-
-class Foo {
-
-}
