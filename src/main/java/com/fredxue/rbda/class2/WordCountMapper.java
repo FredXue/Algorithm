@@ -24,6 +24,8 @@ public class WordCountMapper
         for(String str : KEY_WORDS) {
             if (line.contains(str.toLowerCase())) {
                 context.write (new Text(str), new IntWritable (1));
+            } else {
+                context.write (new Text(str), new IntWritable (0));
             }
         }
     }
