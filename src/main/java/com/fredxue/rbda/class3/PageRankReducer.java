@@ -30,6 +30,6 @@ public class PageRankReducer
 
         NumberFormat formatter = new DecimalFormat("#0.000000");
 
-        context.write(key, new Text(target + " " + String.valueOf(formatter.format(sum))));
+        context.write(key, new Text(target + String.valueOf(formatter.format(sum))));
     }
 }
