@@ -11,7 +11,7 @@ public class StringMatch {
 	}
 	
 	public int naiveMatch(String text, String p){
-		
+
 		return 0;
 	}
 	
