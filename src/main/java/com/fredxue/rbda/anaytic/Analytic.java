@@ -1,4 +1,4 @@
-package com.fredxue.rbda.project;
+package com.fredxue.rbda.anaytic;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -10,10 +10,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /**
  * Created by fredxue on 10/11/2017.
  */
-public class Profiler {
+public class Analytic {
     public static void main (String[] args) throws Exception{
         if (args.length != 2) {
-            System.err.println("Usage: Profiler <input path> <output path>");
+            System.err.println("Usage: Analytic <input path> <output path>");
             System.exit(-1);
         }
 
@@ -21,14 +21,14 @@ public class Profiler {
         Configuration conf = job.getConfiguration();
         conf.set("mapred.textoutputformat.separator", ",");
 
-        job.setJarByClass(Profiler.class);
-        job.setJobName("HR Data Profiler");
+        job.setJarByClass(Analytic.class);
+        job.setJobName("Data Analysis");
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
-        job.setMapperClass(HRDataMapper.class);
-        job.setReducerClass(HRDataReducer.class);
+        job.setMapperClass(GradAndJobsMapper.class);
+        job.setReducerClass(GradAndJobsReducer.class);
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
